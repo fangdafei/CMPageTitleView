@@ -84,6 +84,14 @@ typedef NS_ENUM(NSUInteger,CMPageTitleScaleGradientContentMode) {
     
 };
 
+typedef NS_OPTIONS(NSUInteger, CMPageTitleUnderlineOptions) {
+    CMPageTitleUnderlineOptions_Bottom = 1 << 0,
+    CMPageTitleUnderlineOptions_Top = 1 << 1,
+    CMPageTitleUnderlineOptions_Animated = 1 << 2,
+    
+};
+
+
 @interface CMPageTitleConfig : NSObject
 /**
  颜色渐变样式

@@ -162,6 +162,66 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
     
     [self setReloadBarButtonItem];
     
+    
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onDeviceOrientationDidChange)
+//                         name:UIDeviceOrientationDidChangeNotification
+//                                                   object:nil];
+//
+//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+
+    
+}
+
+
+
+
+
+ - (BOOL)onDeviceOrientationDidChange{
+    //获取当前设备Device
+    UIDevice *device = [UIDevice currentDevice] ;
+    //识别当前设备的旋转方向
+    switch (device.orientation) {
+        case UIDeviceOrientationFaceUp:
+            NSLog(@"屏幕幕朝上平躺");
+            break;
+
+        case UIDeviceOrientationFaceDown:
+            NSLog(@"屏幕朝下平躺");
+            break;
+
+        case UIDeviceOrientationUnknown:
+            //系统当前无法识别设备朝向，可能是倾斜
+            NSLog(@"未知方向");
+            break;
+
+        case UIDeviceOrientationLandscapeLeft:
+            NSLog(@"屏幕向左橫置");
+            
+            [self.pageTitleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                
+            }];
+            
+            
+            break;
+
+        case UIDeviceOrientationLandscapeRight:
+            NSLog(@"屏幕向右橫置");
+            break;
+
+        case UIDeviceOrientationPortrait:
+            NSLog(@"屏幕直立");
+            break;
+
+        case UIDeviceOrientationPortraitUpsideDown:
+            NSLog(@"屏幕直立，上下顛倒");
+            break;
+
+        default:
+            NSLog(@"无法识别");
+            break;
+    }
+    return YES;
 }
 
 - (void)viewDidLoad {
@@ -211,7 +271,8 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
     [self.pageTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(CM_NAVI_BAR_H);
-        make.height.mas_equalTo(CM_SCREEN_H - CM_NAVI_BAR_H);
+        make.bottom.mas_equalTo(0);
+//        make.height.mas_equalTo(CM_SCREEN_H - CM_NAVI_BAR_H);
         
     }];
     self.pageTitleView.delegate = self;
